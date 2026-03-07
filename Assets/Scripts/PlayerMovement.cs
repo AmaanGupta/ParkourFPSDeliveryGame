@@ -1,3 +1,4 @@
+using Unity.Android.Gradle.Manifest;
 using Unity.Cinemachine;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -9,10 +10,12 @@ public class PlayerMovement : MonoBehaviour
     
     private CharacterController characterController;
     
-    private Vector2 moveDirection1;
+    private Vector2 inputmoveDirection;
 
 
-
+    [SerializeField] private Vector3 finalMove;
+    [SerializeField] private Vector3 verticalMove;
+    [SerializeField] private Vector3 horizontalMove;
     [SerializeField] private GameObject cinemachineCamera;
     
     [SerializeField] private InputActionReference move;
@@ -21,10 +24,13 @@ public class PlayerMovement : MonoBehaviour
         characterController=GetComponent<CharacterController>();
     }
 
+    private float movementSpeed=4f;
+    const float GRAVITY=9.81f;
+
     void Update()
     {
         MovementInput();
-        MovePlayer(NormalAndLocal());
+        ResultantMovePlayer(HorizontalMovement(),VerticalMovement());
         Cursor.lockState=CursorLockMode.Locked;
         Cursor.visible=false;
     }
@@ -38,19 +44,33 @@ public class PlayerMovement : MonoBehaviour
 
     void MovementInput()
     {
-        moveDirection1=move.action.ReadValue<Vector2>();
+        inputmoveDirection=move.action.ReadValue<Vector2>();
     }
 
-    private Vector3 NormalAndLocal()
+    private Vector3 HorizontalMovement()
     {
-        Vector3 moveVector= new Vector3(moveDirection1.x,0,moveDirection1.y).normalized;
-        return transform.TransformDirection(moveVector);
+        Vector3 horizontalmoveVector= new Vector3(inputmoveDirection.x,0,inputmoveDirection.y).normalized;
+        horizontalMove= transform.TransformDirection(horizontalmoveVector);
+        return horizontalMove;
         
     }
 
-    void MovePlayer(Vector3 moveVector)
+    private Vector3 VerticalMovement()
     {
-        characterController.Move(moveVector*Time.deltaTime*2f);
+        
+        if (characterController.isGrounded)
+        {
+            verticalMove.y=-2f;
+        } 
+        verticalMove.y-=GRAVITY*Time.deltaTime;
+        return verticalMove;
+    }
+
+    void ResultantMovePlayer(Vector3 horizontalMove, Vector3 verticalMove)
+    {
+        finalMove=horizontalMove*movementSpeed+verticalMove;
+        characterController.Move(finalMove*Time.deltaTime);
+        
     }
 
 }
