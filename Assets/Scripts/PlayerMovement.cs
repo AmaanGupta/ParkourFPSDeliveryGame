@@ -1,11 +1,8 @@
 using System;
-using System.Runtime.CompilerServices;
-using Unity.Android.Gradle.Manifest;
-using Unity.Cinemachine;
-using Unity.VisualScripting;
+
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.SocialPlatforms;
+
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -14,13 +11,18 @@ public class PlayerMovement : MonoBehaviour
     
     
 
-
+    [Header("VELOCITIESS")] 
     [SerializeField] private Vector3 finalMove;
     [SerializeField] private Vector3 verticalMove;
     [SerializeField] private Vector3 horizontalMove;
+
+    [Header("FPP CAMERA")] 
     [SerializeField] private GameObject cinemachineCamera;
 
+    
     private Vector2 inputmoveDirection;
+    [Header("INPUT ACTION REFRENCES")] 
+    
     [SerializeField] private InputActionReference move;
     
     [SerializeField] private InputActionReference jump;
@@ -35,12 +37,20 @@ public class PlayerMovement : MonoBehaviour
             characterController=GetComponent<CharacterController>();
             jump.action.started+=Jump;
         }
+    void OnEnable()
+        {
+            jump.action.started += Jump;
+        }
+    void OnDisable()
+        {
+            jump.action.started -= Jump;
+        }
     void Update()
     {
-        MovementInput();
-        ResultantMovePlayer(HorizontalMovement(),VerticalMovement());
         Cursor.lockState=CursorLockMode.Locked;
         Cursor.visible=false;
+        MovementInput();
+        ResultantMovePlayer(HorizontalMovement(),VerticalMovement());
     }
 
     void LateUpdate()
