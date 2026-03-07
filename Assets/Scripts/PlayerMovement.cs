@@ -1,3 +1,5 @@
+using System;
+using System.Runtime.CompilerServices;
 using Unity.Android.Gradle.Manifest;
 using Unity.Cinemachine;
 using Unity.VisualScripting;
@@ -10,23 +12,29 @@ public class PlayerMovement : MonoBehaviour
     
     private CharacterController characterController;
     
-    private Vector2 inputmoveDirection;
+    
 
 
     [SerializeField] private Vector3 finalMove;
     [SerializeField] private Vector3 verticalMove;
     [SerializeField] private Vector3 horizontalMove;
     [SerializeField] private GameObject cinemachineCamera;
-    
+
+    private Vector2 inputmoveDirection;
     [SerializeField] private InputActionReference move;
-    void Awake()
-    {
-        characterController=GetComponent<CharacterController>();
-    }
+    
+    [SerializeField] private InputActionReference jump;
+    private bool isJump=false;
+    
 
     private float movementSpeed=4f;
+    private float jumpHeight=1f;
     const float GRAVITY=9.81f;
-
+    void Awake()
+        {
+            characterController=GetComponent<CharacterController>();
+            jump.action.started+=Jump;
+        }
     void Update()
     {
         MovementInput();
@@ -62,8 +70,20 @@ public class PlayerMovement : MonoBehaviour
         {
             verticalMove.y=-2f;
         } 
+        if (isJump)
+        {
+            verticalMove.y=(float)Math.Sqrt(2*GRAVITY*jumpHeight);
+            isJump=false;
+        }
         verticalMove.y-=GRAVITY*Time.deltaTime;
         return verticalMove;
+
+    }
+
+    void Jump(InputAction.CallbackContext obj)
+    {
+        isJump=true;
+        
     }
 
     void ResultantMovePlayer(Vector3 horizontalMove, Vector3 verticalMove)
@@ -72,5 +92,7 @@ public class PlayerMovement : MonoBehaviour
         characterController.Move(finalMove*Time.deltaTime);
         
     }
+
+    
 
 }

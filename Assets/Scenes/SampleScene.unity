@@ -207,7 +207,7 @@ Transform:
   m_GameObject: {fileID: 330585543}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.74, z: 0}
+  m_LocalPosition: {x: -0.23, y: 6.44, z: 15.83}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -626,7 +626,7 @@ Transform:
   m_GameObject: {fileID: 1852288437}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.74, z: 0}
+  m_LocalPosition: {x: -0.23, y: 6.44, z: 15.83}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -883,7 +883,7 @@ Transform:
   m_GameObject: {fileID: 1955563242}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.87, z: 0}
+  m_LocalPosition: {x: -0.23, y: 5.57, z: 15.83}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -903,8 +903,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3dc6bb6fb396bfc49a566a239a9ce6ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerMovement
+  finalMove: {x: 0, y: 0, z: 0}
+  verticalMove: {x: 0, y: 0, z: 0}
+  horizontalMove: {x: 0, y: 0, z: 0}
   cinemachineCamera: {fileID: 1852288437}
   move: {fileID: 6707366183689250088, guid: d7804f41e96ff3e4cbfff6cffca71830, type: 3}
+  jump: {fileID: -3054016491580824888, guid: d7804f41e96ff3e4cbfff6cffca71830, type: 3}
 --- !u!114 &1955563246
 MonoBehaviour:
   m_ObjectHideFlags: 0
