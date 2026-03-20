@@ -1,5 +1,5 @@
 using System;
-
+using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -35,6 +35,10 @@ public class PlayerMovement : MonoBehaviour
     private float jumpHeight=1.3f;
     private float sprintMultiplier=2f;
     const float GRAVITY=18f;
+    [SerializeField] private float coyoteCounter=0f;
+    private float coyoteTimer=0.2f;
+    
+    [SerializeField] private bool requiredIsGrounded=false;
 
     void Awake()
     {
@@ -64,7 +68,7 @@ public class PlayerMovement : MonoBehaviour
     }
     void Update()
     {
-        
+        GroundCheck();
         MovementInput();
         ResultantMovePlayer(HorizontalMovement(),VerticalMovement());
     }
@@ -99,7 +103,8 @@ public class PlayerMovement : MonoBehaviour
          
         if (isJump)
         {
-            verticalMove.y=(float)Math.Sqrt(2*GRAVITY*jumpHeight);
+            coyoteCounter=0f;
+            verticalMove.y=Mathf.Sqrt(2*GRAVITY*jumpHeight);
             isJump=false;
         }
         verticalMove.y-=GRAVITY*Time.deltaTime;
@@ -109,9 +114,12 @@ public class PlayerMovement : MonoBehaviour
 
     void Jump(InputAction.CallbackContext obj)
     {
-        if (characterController.isGrounded)
+        
+        if (requiredIsGrounded)
         {
             isJump=true;
+            
+            
         }
         
         
@@ -135,6 +143,22 @@ public class PlayerMovement : MonoBehaviour
         
     }
 
+
+    void GroundCheck(){
+        if(characterController.isGrounded)
+        {
+            coyoteCounter=coyoteTimer;
+        }
+
+        if (!characterController.isGrounded)
+        {
+            coyoteCounter-=Time.deltaTime;
+        }
+        requiredIsGrounded = coyoteCounter > 0;
+
+
+    }
+    
     
 
 }
