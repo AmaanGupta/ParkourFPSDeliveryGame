@@ -909,6 +909,7 @@ MonoBehaviour:
   cinemachineCamera: {fileID: 1852288437}
   move: {fileID: 6707366183689250088, guid: d7804f41e96ff3e4cbfff6cffca71830, type: 3}
   jump: {fileID: -3054016491580824888, guid: d7804f41e96ff3e4cbfff6cffca71830, type: 3}
+  sprint: {fileID: 4485449602144160806, guid: d7804f41e96ff3e4cbfff6cffca71830, type: 3}
 --- !u!114 &1955563246
 MonoBehaviour:
   m_ObjectHideFlags: 0

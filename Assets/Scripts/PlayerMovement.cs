@@ -30,16 +30,22 @@ public class PlayerMovement : MonoBehaviour
     private bool isJump=false;
     
 
-    private float constantmovementSpeed=4f;
-    private float movementSpeed=4f;
+    private float constantmovementSpeed=2f;
+    private float movementSpeed;
     private float jumpHeight=1.3f;
+    private float sprintMultiplier=2f;
     const float GRAVITY=18f;
+
     void Awake()
-        {
-            characterController=GetComponent<CharacterController>();
-        }
+    {
+        characterController=GetComponent<CharacterController>();
+    }
     void OnEnable()
         {
+            movementSpeed=constantmovementSpeed;
+            
+
+
             jump.action.started += Jump;
             sprint.action.started += StartSprint;
             sprint.action.canceled += StopSprint;
@@ -50,10 +56,15 @@ public class PlayerMovement : MonoBehaviour
             sprint.action.started -= StartSprint;
             sprint.action.canceled -= StopSprint;
         }
-    void Update()
+
+    void Start()
     {
         Cursor.lockState=CursorLockMode.Locked;
         Cursor.visible=false;
+    }
+    void Update()
+    {
+        
         MovementInput();
         ResultantMovePlayer(HorizontalMovement(),VerticalMovement());
     }
@@ -108,7 +119,7 @@ public class PlayerMovement : MonoBehaviour
 
     void StartSprint(InputAction.CallbackContext obj)
     {
-        movementSpeed=constantmovementSpeed*1.5f;
+        movementSpeed=constantmovementSpeed*sprintMultiplier;
     }
     void StopSprint(InputAction.CallbackContext obj)
     {
