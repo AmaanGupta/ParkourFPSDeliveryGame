@@ -26,24 +26,29 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private InputActionReference move;
     
     [SerializeField] private InputActionReference jump;
+    [SerializeField] private InputActionReference sprint;
     private bool isJump=false;
     
 
+    private float constantmovementSpeed=4f;
     private float movementSpeed=4f;
-    private float jumpHeight=1f;
-    const float GRAVITY=9.81f;
+    private float jumpHeight=1.3f;
+    const float GRAVITY=18f;
     void Awake()
         {
             characterController=GetComponent<CharacterController>();
-            jump.action.started+=Jump;
         }
     void OnEnable()
         {
             jump.action.started += Jump;
+            sprint.action.started += StartSprint;
+            sprint.action.canceled += StopSprint;
         }
     void OnDisable()
         {
             jump.action.started -= Jump;
+            sprint.action.started -= StartSprint;
+            sprint.action.canceled -= StopSprint;
         }
     void Update()
     {
@@ -79,7 +84,8 @@ public class PlayerMovement : MonoBehaviour
         if (characterController.isGrounded)
         {
             verticalMove.y=-2f;
-        } 
+        }
+         
         if (isJump)
         {
             verticalMove.y=(float)Math.Sqrt(2*GRAVITY*jumpHeight);
@@ -92,9 +98,24 @@ public class PlayerMovement : MonoBehaviour
 
     void Jump(InputAction.CallbackContext obj)
     {
-        isJump=true;
+        if (characterController.isGrounded)
+        {
+            isJump=true;
+        }
+        
         
     }
+
+    void StartSprint(InputAction.CallbackContext obj)
+    {
+        movementSpeed=constantmovementSpeed*1.5f;
+    }
+    void StopSprint(InputAction.CallbackContext obj)
+    {
+        movementSpeed=constantmovementSpeed;
+    }
+
+
 
     void ResultantMovePlayer(Vector3 horizontalMove, Vector3 verticalMove)
     {
