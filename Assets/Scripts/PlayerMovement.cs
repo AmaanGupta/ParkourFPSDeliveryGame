@@ -37,6 +37,8 @@ public class PlayerMovement : MonoBehaviour
     const float GRAVITY=18f;
     [SerializeField] private float coyoteCounter=0f;
     private float coyoteTimer=0.2f;
+    [SerializeField] private float jumpBufferCounter=0f;
+    private float jumpBufferTimer=0.2f;
     
     [SerializeField] private bool requiredIsGrounded=false;
 
@@ -68,8 +70,10 @@ public class PlayerMovement : MonoBehaviour
     }
     void Update()
     {
-        GroundCheck();
         MovementInput();
+        GroundCheck();
+        JumpBuffer();
+        
         ResultantMovePlayer(HorizontalMovement(),VerticalMovement());
     }
 
@@ -117,13 +121,29 @@ public class PlayerMovement : MonoBehaviour
         
         if (requiredIsGrounded)
         {
+           isJump=true;      
+        }
+
+        if (!requiredIsGrounded)
+        {
+            jumpBufferCounter=jumpBufferTimer;
+
+        }
+    }
+
+    void JumpBuffer()
+    {
+        
+        jumpBufferCounter-=Time.deltaTime;
+        if (requiredIsGrounded && jumpBufferCounter>0)
+        {
             isJump=true;
-            
-            
+            jumpBufferCounter=0f;
         }
         
-        
+
     }
+    
 
     void StartSprint(InputAction.CallbackContext obj)
     {
