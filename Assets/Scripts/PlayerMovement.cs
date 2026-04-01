@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -147,10 +148,20 @@ public class PlayerMovement : MonoBehaviour
 
     void StartSprint(InputAction.CallbackContext obj)
     {
-        movementSpeed=constantmovementSpeed*sprintMultiplier;
+        if (requiredIsGrounded)
+        {
+            movementSpeed=constantmovementSpeed*sprintMultiplier;
+            if (inputmoveDirection!=new Vector2(0, 0))
+            {
+                cinemachineCamera.GetComponent<CinemachineCamera>().Lens.FieldOfView=90;
+            }
+        }
+        
+        
     }
     void StopSprint(InputAction.CallbackContext obj)
     {
+        cinemachineCamera.GetComponent<CinemachineCamera>().Lens.FieldOfView=80;
         movementSpeed=constantmovementSpeed;
     }
 
