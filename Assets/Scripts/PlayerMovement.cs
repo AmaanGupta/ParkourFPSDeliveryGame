@@ -31,7 +31,7 @@ public class PlayerMovement : MonoBehaviour
     private bool isJump=false;
     
 
-    private float constantmovementSpeed=2f;
+    private float constantmovementSpeed=5f;
     private float movementSpeed;
     private float jumpHeight=1.3f;
     private float sprintMultiplier=2f;
