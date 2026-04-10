@@ -18,7 +18,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private Vector3 horizontalMove;
 
     [Header("FPP CAMERA")] 
-    [SerializeField] private GameObject cinemachineCamera;
+    [SerializeField] private CinemachineCamera cinemachineCamera;
 
     
     private Vector2 inputmoveDirection;
@@ -28,6 +28,8 @@ public class PlayerMovement : MonoBehaviour
     
     [SerializeField] private InputActionReference jump;
     [SerializeField] private InputActionReference sprint;
+    private float targetFOV=60f;
+
     private bool isJump=false;
     
 
@@ -35,6 +37,7 @@ public class PlayerMovement : MonoBehaviour
     private float movementSpeed;
     private float jumpHeight=1.3f;
     private float sprintMultiplier=2f;
+    
     const float GRAVITY=18f;
     [SerializeField] private float coyoteCounter=0f;
     private float coyoteTimer=0.2f;
@@ -46,6 +49,8 @@ public class PlayerMovement : MonoBehaviour
     void Awake()
     {
         characterController=GetComponent<CharacterController>();
+
+        
     }
     void OnEnable()
         {
@@ -74,6 +79,7 @@ public class PlayerMovement : MonoBehaviour
         MovementInput();
         GroundCheck();
         JumpBuffer();
+        SprintInterpolator();
         
         ResultantMovePlayer(HorizontalMovement(),VerticalMovement());
     }
@@ -87,13 +93,15 @@ public class PlayerMovement : MonoBehaviour
 
     void MovementInput()
     {
+
         inputmoveDirection=move.action.ReadValue<Vector2>();
+        
     }
 
     private Vector3 HorizontalMovement()
     {
         Vector3 horizontalmoveVector= new Vector3(inputmoveDirection.x,0,inputmoveDirection.y).normalized;
-        horizontalMove= transform.TransformDirection(horizontalmoveVector);
+        horizontalMove=Vector3.Lerp(horizontalMove,transform.TransformDirection(horizontalmoveVector),5f*Time.deltaTime);
         return horizontalMove;
         
     }
@@ -153,15 +161,19 @@ public class PlayerMovement : MonoBehaviour
             movementSpeed=constantmovementSpeed*sprintMultiplier;
             if (inputmoveDirection!=new Vector2(0, 0))
             {
-                cinemachineCamera.GetComponent<CinemachineCamera>().Lens.FieldOfView=90;
+                targetFOV=90;
             }
         }
         
         
     }
+    void SprintInterpolator()
+    {
+        cinemachineCamera.Lens.FieldOfView=Mathf.Lerp(cinemachineCamera.Lens.FieldOfView,targetFOV,5f*Time.deltaTime);
+    }
     void StopSprint(InputAction.CallbackContext obj)
     {
-        cinemachineCamera.GetComponent<CinemachineCamera>().Lens.FieldOfView=80;
+        targetFOV=60f;
         movementSpeed=constantmovementSpeed;
     }
 
