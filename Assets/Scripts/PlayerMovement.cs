@@ -169,7 +169,7 @@ public class PlayerMovement : MonoBehaviour
     }
     void SprintInterpolator()
     {
-        cinemachineCamera.Lens.FieldOfView=Mathf.Lerp(cinemachineCamera.Lens.FieldOfView,targetFOV,5f*Time.deltaTime);
+        cinemachineCamera.Lens.FieldOfView=Mathf.Lerp(cinemachineCamera.Lens.FieldOfView,targetFOV,2f*Time.deltaTime);
     }
     void StopSprint(InputAction.CallbackContext obj)
     {
