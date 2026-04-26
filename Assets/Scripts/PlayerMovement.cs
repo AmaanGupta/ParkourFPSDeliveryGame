@@ -81,7 +81,7 @@ public class PlayerMovement : MonoBehaviour
         JumpBuffer();
         SprintInterpolator();
         
-        ResultantMovePlayer(HorizontalMovement(),VerticalMovement());
+        
     }
 
     void LateUpdate()
@@ -184,6 +184,11 @@ public class PlayerMovement : MonoBehaviour
         finalMove=horizontalMove*movementSpeed+verticalMove;
         characterController.Move(finalMove*Time.deltaTime);
         
+    }
+
+    public void ExecuteMovement()
+    {
+        ResultantMovePlayer(HorizontalMovement(),VerticalMovement());
     }
 
 
