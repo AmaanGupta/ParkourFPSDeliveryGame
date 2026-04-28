@@ -2,12 +2,12 @@ using UnityEngine;
 
 public class PlayerManager : MonoBehaviour
 {
-    enum PlayerState
+    public enum PlayerState
     {
         Normal,
         LedgeGrab
     }
-    [SerializeField] private PlayerState currentState;
+    public PlayerState currentState;
     [SerializeField] private PlayerMovement playerMovementScript;
     [SerializeField] private LedgeGrab ledgeGrabScript;
 
@@ -40,7 +40,8 @@ public class PlayerManager : MonoBehaviour
     }
     void UpdateLedgeGrab()
     {
-        Debug.Log("Ledge Grabbing");
+        
+        ledgeGrabScript.LedgeClimb();
     }
     
 

@@ -9,6 +9,8 @@ public class PlayerMovement : MonoBehaviour
 {
     
     private CharacterController characterController;
+    [SerializeField] private  PlayerManager playerManager;
+    public bool isClimb;
     
     
 
@@ -127,16 +129,23 @@ public class PlayerMovement : MonoBehaviour
 
     void Jump(InputAction.CallbackContext obj)
     {
-        
-        if (requiredIsGrounded)
+        if (playerManager.currentState == PlayerManager.PlayerState.LedgeGrab)
         {
-           isJump=true;      
+            isClimb=true;
+            
         }
-
-        if (!requiredIsGrounded)
+        else if(playerManager.currentState == PlayerManager.PlayerState.Normal)
         {
-            jumpBufferCounter=jumpBufferTimer;
+            if (requiredIsGrounded)
+            {
+                isJump=true;      
+            }
 
+            if (!requiredIsGrounded)
+            {
+                jumpBufferCounter=jumpBufferTimer;
+
+            }
         }
     }
 
@@ -188,6 +197,7 @@ public class PlayerMovement : MonoBehaviour
 
     public void ExecuteMovement()
     {
+        
         ResultantMovePlayer(HorizontalMovement(),VerticalMovement());
     }
 
