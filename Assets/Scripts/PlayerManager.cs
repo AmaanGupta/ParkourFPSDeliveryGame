@@ -32,7 +32,11 @@ public class PlayerManager : MonoBehaviour
     {
         if (ledgeGrabScript.isledgeGrab)
         {
+            ledgeGrabScript.climbCompleted=false;
+            
+
             currentState=PlayerState.LedgeGrab;
+            playerMovementScript.isClimb=false;
         }
         playerMovementScript.ExecuteMovement();
         
@@ -40,7 +44,10 @@ public class PlayerManager : MonoBehaviour
     }
     void UpdateLedgeGrab()
     {
-        
+        if (ledgeGrabScript.climbCompleted)
+        {
+            currentState=PlayerState.Normal;
+        }
         ledgeGrabScript.LedgeClimb();
     }
     

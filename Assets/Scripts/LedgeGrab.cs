@@ -1,3 +1,4 @@
+using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.TextCore.Text;
@@ -11,6 +12,9 @@ public class LedgeGrab : MonoBehaviour
     [SerializeField] private bool legCheck;
     private float boxCastDistance=0.75f;
     public bool isledgeGrab;
+    private float timeCounter;
+    private float maxTime=0.2f;
+    public bool climbCompleted;
 
     void Start()
     {
@@ -19,7 +23,7 @@ public class LedgeGrab : MonoBehaviour
     }
     void Update()
     {
-        bool isHit=Physics.BoxCast(transform.position,new Vector3(0.1f,0.8955f,0),transform.forward,transform.rotation,boxCastDistance,ledgeLayer);
+        bool isHit=Physics.BoxCast(transform.position,new Vector3(0.1f,0.2f,0),transform.forward,transform.rotation,boxCastDistance,ledgeLayer);
         isledgeGrab=isHit;
         Debug.Log(isHit);
         bool isWall=Physics.Raycast(legCheckGO.transform.position,legCheckGO.transform.forward,2f);
@@ -32,12 +36,27 @@ public class LedgeGrab : MonoBehaviour
         {
             if (!legCheck)
             {
-                characterController.Move(transform.forward*5f*Time.deltaTime);
+                
+                StartCoroutine(MoveForwardCoroutine());
                 return;
             }
+
+            
             characterController.Move(transform.up*5f*Time.deltaTime);
         }
 
         
+    }
+
+    IEnumerator MoveForwardCoroutine()
+    {
+        timeCounter=0f;
+        while (timeCounter <= maxTime)
+        {
+            characterController.Move(transform.forward*0.4f*Time.deltaTime);
+            timeCounter+=Time.deltaTime;
+            yield return null;
+        }
+        climbCompleted=true;
     }
 }
