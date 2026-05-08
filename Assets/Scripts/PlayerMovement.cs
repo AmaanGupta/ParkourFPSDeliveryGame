@@ -47,6 +47,8 @@ public class PlayerMovement : MonoBehaviour
     private float jumpBufferTimer=0.2f;
     
     [SerializeField] private bool requiredIsGrounded=false;
+    [SerializeField] private Animator bodyAnim;
+    [SerializeField] private Animator onlyHandsAnim;
 
     void Awake()
     {
@@ -73,8 +75,8 @@ public class PlayerMovement : MonoBehaviour
 
     void Start()
     {
-        Cursor.lockState=CursorLockMode.Locked;
-        Cursor.visible=false;
+        // Cursor.lockState=CursorLockMode.Locked;
+        // Cursor.visible=false;
     }
     void Update()
     {
@@ -88,7 +90,11 @@ public class PlayerMovement : MonoBehaviour
 
     void LateUpdate()
     {
-        transform.rotation=Quaternion.Euler(0,cinemachineCamera.transform.eulerAngles.y,0);
+        if (playerManager.currentState == PlayerManager.PlayerState.Normal)
+        {
+            transform.rotation=Quaternion.Euler(0,cinemachineCamera.transform.eulerAngles.y,0);
+        }
+        
     }
 
 
@@ -97,6 +103,23 @@ public class PlayerMovement : MonoBehaviour
     {
 
         inputmoveDirection=move.action.ReadValue<Vector2>();
+        bodyAnim.SetFloat("MoveX",inputmoveDirection.x);
+        bodyAnim.SetFloat("MoveY",inputmoveDirection.y);
+        onlyHandsAnim.SetFloat("MoveX",inputmoveDirection.x);
+        onlyHandsAnim.SetFloat("MoveY",inputmoveDirection.y);
+        
+        if (inputmoveDirection != new Vector2(0,0))
+        {
+            bodyAnim.SetBool("Move",true);
+            onlyHandsAnim.SetBool("Move",true);
+        }
+        else
+        {
+            bodyAnim.SetBool("Move",false);
+            onlyHandsAnim.SetBool("Move",false);
+        }
+        
+        
         
     }
 

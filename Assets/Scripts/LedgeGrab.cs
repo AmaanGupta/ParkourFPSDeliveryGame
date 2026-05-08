@@ -10,6 +10,8 @@ public class LedgeGrab : MonoBehaviour
     [SerializeField] private PlayerMovement playerMovement;
     [SerializeField] private GameObject legCheckGO;
     [SerializeField] private bool legCheck;
+    [SerializeField] private Animator onlyHandsAnim;
+    [SerializeField] private Animator bodyAnim;
     private float boxCastDistance=0.75f;
     public bool isledgeGrab;
     private float timeCounter;
@@ -26,7 +28,7 @@ public class LedgeGrab : MonoBehaviour
         bool isHit=Physics.BoxCast(transform.position,new Vector3(0.1f,0.2f,0),transform.forward,transform.rotation,boxCastDistance,ledgeLayer);
         isledgeGrab=isHit;
         Debug.Log(isHit);
-        bool isWall=Physics.Raycast(legCheckGO.transform.position,legCheckGO.transform.forward,2f);
+        bool isWall=Physics.Raycast(legCheckGO.transform.position,legCheckGO.transform.forward,1.5f);
         legCheck=isWall;
     }
 
@@ -34,6 +36,10 @@ public class LedgeGrab : MonoBehaviour
     {
         if (playerMovement.isClimb)
         {
+            bodyAnim.SetBool("Climb",true);
+            onlyHandsAnim.SetBool("Climb",true);
+            
+            
             if (!legCheck)
             {
                 
@@ -43,6 +49,7 @@ public class LedgeGrab : MonoBehaviour
 
             
             characterController.Move(transform.up*5f*Time.deltaTime);
+            
         }
 
         
@@ -51,12 +58,18 @@ public class LedgeGrab : MonoBehaviour
     IEnumerator MoveForwardCoroutine()
     {
         timeCounter=0f;
+        
         while (timeCounter <= maxTime)
         {
             characterController.Move(transform.forward*0.4f*Time.deltaTime);
             timeCounter+=Time.deltaTime;
             yield return null;
         }
+        playerMovement.isClimb=false;
+        bodyAnim.SetBool("Climb",false);
+        onlyHandsAnim.SetBool("Climb",false);
         climbCompleted=true;
+        
+
     }
 }
