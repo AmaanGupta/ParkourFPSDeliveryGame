@@ -1,4 +1,5 @@
 using System.Collections;
+using NUnit.Framework;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.TextCore.Text;
@@ -17,6 +18,7 @@ public class LedgeGrab : MonoBehaviour
     private float timeCounter;
     private float maxTime=0.2f;
     public bool climbCompleted;
+    public Transform ledgeTransform;
 
     void Start()
     {
@@ -25,7 +27,13 @@ public class LedgeGrab : MonoBehaviour
     }
     void Update()
     {
-        bool isHit=Physics.BoxCast(transform.position,new Vector3(0.1f,0.2f,0),transform.forward,transform.rotation,boxCastDistance,ledgeLayer);
+        RaycastHit hitInfo;
+        bool isHit=Physics.BoxCast(transform.position,new Vector3(0.1f,0.2f,0),transform.forward,out hitInfo,transform.rotation, boxCastDistance,ledgeLayer);
+        if (isHit)
+        {
+            ledgeTransform=hitInfo.collider.transform;
+        }
+        
         isledgeGrab=isHit;
         Debug.Log(isHit);
         bool isWall=Physics.Raycast(legCheckGO.transform.position,legCheckGO.transform.forward,1.5f);

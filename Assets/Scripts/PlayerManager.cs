@@ -36,6 +36,9 @@ public class PlayerManager : MonoBehaviour
     {
         if (ledgeGrabScript.isledgeGrab)
         {
+            transform.rotation=Quaternion.Euler(0,ledgeGrabScript.ledgeTransform.rotation.eulerAngles.y,0);
+            CinemachineTakesOver(true);
+            
 
             ledgeGrabScript.climbCompleted=false;
             
@@ -48,7 +51,7 @@ public class PlayerManager : MonoBehaviour
             bodyAnim.SetTrigger("Hang");
 
             cam.GetComponent<CinemachinePanTilt>().PanAxis.Wrap=false;
-            cam.GetComponent<CinemachinePanTilt>().PanAxis.Range=new Vector2(-150,-30);
+            cam.GetComponent<CinemachinePanTilt>().PanAxis.Range=new Vector2(-45,45);
         }
         playerMovementScript.ExecuteMovement();
         
@@ -58,11 +61,23 @@ public class PlayerManager : MonoBehaviour
     {
         if (ledgeGrabScript.climbCompleted)
         {
-            cam.GetComponent<CinemachinePanTilt>().PanAxis.Wrap=true;
-            cam.GetComponent<CinemachinePanTilt>().PanAxis.Range=new Vector2(-180,180);
+            cam.GetComponent<CinemachinePanTilt>().PanAxis.Value=0;
+            CinemachineTakesOver(false);
             currentState=PlayerState.Normal;
         }
         ledgeGrabScript.LedgeClimb();
+    }
+
+    void CinemachineTakesOver(bool boolean)
+    {
+        CinemachineInputAxisController controllerComponent = cam.GetComponent<CinemachineInputAxisController>();
+        foreach (var controller in controllerComponent.Controllers) 
+        {
+            if (controller.Name == "Look X (Pan)")
+            {
+                controller.Enabled=boolean;
+            }
+        }
     }
     
 

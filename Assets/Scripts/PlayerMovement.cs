@@ -24,13 +24,16 @@ public class PlayerMovement : MonoBehaviour
 
     
     private Vector2 inputmoveDirection;
+    [SerializeField] private Vector2 lookInput;
     [Header("INPUT ACTION REFRENCES")] 
     
     [SerializeField] private InputActionReference move;
     
     [SerializeField] private InputActionReference jump;
     [SerializeField] private InputActionReference sprint;
+    [SerializeField] private InputActionReference look;
     private float targetFOV=60f;
+    private float mouseSensitivity=0.1f;
 
     private bool isJump=false;
     
@@ -88,14 +91,7 @@ public class PlayerMovement : MonoBehaviour
         
     }
 
-    void LateUpdate()
-    {
-        if (playerManager.currentState == PlayerManager.PlayerState.Normal)
-        {
-            transform.rotation=Quaternion.Euler(0,cinemachineCamera.transform.eulerAngles.y,0);
-        }
-        
-    }
+    
 
 
 
@@ -103,6 +99,16 @@ public class PlayerMovement : MonoBehaviour
     {
 
         inputmoveDirection=move.action.ReadValue<Vector2>();
+        lookInput=look.action.ReadValue<Vector2>();
+        float mouseX=lookInput.x*mouseSensitivity;
+
+        if (playerManager.currentState == PlayerManager.PlayerState.Normal)
+        {
+            transform.Rotate(Vector3.up*mouseX);
+        }
+        
+
+
         bodyAnim.SetFloat("MoveX",inputmoveDirection.x);
         bodyAnim.SetFloat("MoveY",inputmoveDirection.y);
         onlyHandsAnim.SetFloat("MoveX",inputmoveDirection.x);

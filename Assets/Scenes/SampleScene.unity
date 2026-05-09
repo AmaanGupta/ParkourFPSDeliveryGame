@@ -229,7 +229,7 @@ MonoBehaviour:
   legCheckGO: {fileID: 84984117}
   legCheck: 0
   onlyHandsAnim: {fileID: 28003729}
-  bodyAnim: {fileID: 386075328}
+  bodyAnim: {fileID: 2035202784}
   isledgeGrab: 0
   climbCompleted: 0
 --- !u!1 &210255240
@@ -523,33 +523,6 @@ MonoBehaviour:
       m_PostInfinity: 2
       m_RotationOrder: 4
   CustomBlends: {fileID: 0}
---- !u!1 &386075326 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7036213049465896255, guid: c18122e5ef5f6da4bbf1382242101fed, type: 3}
-  m_PrefabInstance: {fileID: 1923608391}
-  m_PrefabAsset: {fileID: 0}
---- !u!95 &386075328
-Animator:
-  serializedVersion: 7
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 386075326}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 19c286e14353ff044872ea21f712eba4, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_AnimatePhysics: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &410087039
 GameObject:
   m_ObjectHideFlags: 0
@@ -1691,7 +1664,7 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 7036213049465896255, guid: c18122e5ef5f6da4bbf1382242101fed, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 386075328}
+      addedObject: {fileID: 2035202784}
   m_SourcePrefab: {fileID: 100100000, guid: c18122e5ef5f6da4bbf1382242101fed, type: 3}
 --- !u!1 &1955563242
 GameObject:
@@ -1784,6 +1757,8 @@ MonoBehaviour:
   coyoteCounter: 0
   jumpBufferCounter: 0
   requiredIsGrounded: 0
+  bodyAnim: {fileID: 2035202784}
+  onlyHandsAnim: {fileID: 28003729}
 --- !u!114 &1955563246
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1847,15 +1822,45 @@ MonoBehaviour:
   currentState: 0
   playerMovementScript: {fileID: 1955563245}
   ledgeGrabScript: {fileID: 163065399}
+  bodyAnim: {fileID: 2035202784}
+  onlyHandsAnim: {fileID: 28003729}
+  cam: {fileID: 1852288437}
+--- !u!1 &2035202782 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7036213049465896255, guid: c18122e5ef5f6da4bbf1382242101fed, type: 3}
+  m_PrefabInstance: {fileID: 1923608391}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &2035202784
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2035202782}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 19c286e14353ff044872ea21f712eba4, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 330585546}
+  - {fileID: 1852288439}
   - {fileID: 410087041}
   - {fileID: 832575519}
   - {fileID: 1955563244}
-  - {fileID: 1852288439}
   - {fileID: 989946903}
   - {fileID: 1359249689}
   - {fileID: 864876355}
