@@ -13,7 +13,7 @@ public class LedgeGrab : MonoBehaviour
     [SerializeField] private bool legCheck;
     [SerializeField] private Animator onlyHandsAnim;
     [SerializeField] private Animator bodyAnim;
-    private float boxCastDistance=0.75f;
+    private float boxCastDistance=0.5f;
     public bool isledgeGrab;
     private float timeCounter;
     private float maxTime=0.2f;
