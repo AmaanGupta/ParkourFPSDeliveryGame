@@ -10,7 +10,7 @@ public class PlayerMovement : MonoBehaviour
     
     private CharacterController characterController;
     [SerializeField] private  PlayerManager playerManager;
-    public bool isClimb;
+    
     
     
 
@@ -78,8 +78,8 @@ public class PlayerMovement : MonoBehaviour
 
     void Start()
     {
-        // Cursor.lockState=CursorLockMode.Locked;
-        // Cursor.visible=false;
+        Cursor.lockState=CursorLockMode.Locked;
+        Cursor.visible=false;
     }
     void Update()
     {
@@ -131,7 +131,7 @@ public class PlayerMovement : MonoBehaviour
 
     private Vector3 HorizontalMovement()
     {
-        Vector3 horizontalmoveVector= new Vector3(inputmoveDirection.x,0,inputmoveDirection.y).normalized;
+        Vector3 horizontalmoveVector= new Vector3(inputmoveDirection.x,0,inputmoveDirection.y);
         horizontalMove=Vector3.Lerp(horizontalMove,transform.TransformDirection(horizontalmoveVector),5f*Time.deltaTime);
         return horizontalMove;
         
@@ -158,12 +158,8 @@ public class PlayerMovement : MonoBehaviour
 
     void Jump(InputAction.CallbackContext obj)
     {
-        if (playerManager.currentState == PlayerManager.PlayerState.LedgeGrab)
-        {
-            isClimb=true;
-            
-        }
-        else if(playerManager.currentState == PlayerManager.PlayerState.Normal)
+        
+        if(playerManager.currentState == PlayerManager.PlayerState.Normal)
         {
             if (requiredIsGrounded)
             {

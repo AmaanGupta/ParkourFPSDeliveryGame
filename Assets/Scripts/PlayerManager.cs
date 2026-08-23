@@ -5,12 +5,12 @@ public class PlayerManager : MonoBehaviour
 {
     public enum PlayerState
     {
-        Normal,
-        LedgeGrab
+        Normal
+        
     }
     public PlayerState currentState;
     [SerializeField] private PlayerMovement playerMovementScript;
-    [SerializeField] private LedgeGrab ledgeGrabScript;
+    
     [SerializeField] private Animator bodyAnim;
     [SerializeField] private Animator onlyHandsAnim;
     [SerializeField] private GameObject cam;
@@ -26,47 +26,18 @@ public class PlayerManager : MonoBehaviour
             case PlayerState.Normal:
                 UpdateNormal();
                 break;
-            case PlayerState.LedgeGrab:
-                UpdateLedgeGrab();
-                break;
+            
         }
 
     }
     void UpdateNormal()
     {
-        if (ledgeGrabScript.isledgeGrab)
-        {
-            transform.rotation=Quaternion.Euler(0,ledgeGrabScript.ledgeTransform.rotation.eulerAngles.y,0);
-            CinemachineTakesOver(true);
-            
-
-            ledgeGrabScript.climbCompleted=false;
-            
-            ledgeGrabScript.climbCompleted=false;
-            currentState=PlayerState.LedgeGrab;
-
-            playerMovementScript.isClimb=false;
-
-            onlyHandsAnim.SetTrigger("Hang");
-            bodyAnim.SetTrigger("Hang");
-
-            cam.GetComponent<CinemachinePanTilt>().PanAxis.Wrap=false;
-            cam.GetComponent<CinemachinePanTilt>().PanAxis.Range=new Vector2(-45,45);
-        }
+        
         playerMovementScript.ExecuteMovement();
         
 
     }
-    void UpdateLedgeGrab()
-    {
-        if (ledgeGrabScript.climbCompleted)
-        {
-            cam.GetComponent<CinemachinePanTilt>().PanAxis.Value=0;
-            CinemachineTakesOver(false);
-            currentState=PlayerState.Normal;
-        }
-        ledgeGrabScript.LedgeClimb();
-    }
+    
 
     void CinemachineTakesOver(bool boolean)
     {
