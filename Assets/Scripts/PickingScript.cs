@@ -49,7 +49,6 @@ public class PickingScript : MonoBehaviour
 
         }
         isGrabbed=true;
-
     }
     void StopInteract(InputAction.CallbackContext obj)
     {

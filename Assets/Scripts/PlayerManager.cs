@@ -32,24 +32,11 @@ public class PlayerManager : MonoBehaviour
     }
     void UpdateNormal()
     {
-        
         playerMovementScript.ExecuteMovement();
-        
-
     }
     
 
-    void CinemachineTakesOver(bool boolean)
-    {
-        CinemachineInputAxisController controllerComponent = cam.GetComponent<CinemachineInputAxisController>();
-        foreach (var controller in controllerComponent.Controllers) 
-        {
-            if (controller.Name == "Look X (Pan)")
-            {
-                controller.Enabled=boolean;
-            }
-        }
-    }
+    
     
 
 
