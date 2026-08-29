@@ -7,6 +7,11 @@ using UnityEngine.InputSystem;
 
 public class PlayerMovement : MonoBehaviour
 {
+    //State Machine Variables
+    [Header("State Machine VARIABLES")]
+    private PlayerStateMachine stateMachine;
+    
+    public PlayerIdleState IdleState { get; private set; }
     
     private CharacterController characterController;
     [SerializeField] private  PlayerManager playerManager;
@@ -55,6 +60,8 @@ public class PlayerMovement : MonoBehaviour
 
     void Awake()
     {
+        stateMachine = new PlayerStateMachine();
+        IdleState = new PlayerIdleState(this, stateMachine);
         characterController=GetComponent<CharacterController>();
 
         
@@ -62,9 +69,6 @@ public class PlayerMovement : MonoBehaviour
     void OnEnable()
         {
             movementSpeed=constantmovementSpeed;
-            
-
-
             jump.action.started += Jump;
             sprint.action.started += StartSprint;
             sprint.action.canceled += StopSprint;
@@ -78,6 +82,7 @@ public class PlayerMovement : MonoBehaviour
 
     void Start()
     {
+        stateMachine.Initialize(IdleState);
         Cursor.lockState=CursorLockMode.Locked;
         Cursor.visible=false;
     }
@@ -87,6 +92,7 @@ public class PlayerMovement : MonoBehaviour
         GroundCheck();
         JumpBuffer();
         SprintInterpolator();
+        stateMachine.CurrentState.Update();
         
         
     }
@@ -114,7 +120,7 @@ public class PlayerMovement : MonoBehaviour
         onlyHandsAnim.SetFloat("MoveX",inputmoveDirection.x);
         onlyHandsAnim.SetFloat("MoveY",inputmoveDirection.y);
         
-        if (inputmoveDirection != new Vector2(0,0))
+        if (inputmoveDirection.magnitude>=0.1f)
         {
             bodyAnim.SetBool("Move",true);
             onlyHandsAnim.SetBool("Move",true);
