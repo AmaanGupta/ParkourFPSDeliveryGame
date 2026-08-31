@@ -61,7 +61,7 @@ public class PlayerMovement : MonoBehaviour
     void Awake()
     {
         stateMachine = new PlayerStateMachine();
-        IdleState = new PlayerIdleState(this, stateMachine);
+        // IdleState = new PlayerIdleState(this, stateMachine);
         characterController=GetComponent<CharacterController>();
 
         

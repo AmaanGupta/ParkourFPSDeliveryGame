@@ -146,95 +146,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!1 &84984117
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 84984118}
-  m_Layer: 0
-  m_Name: LegCheck
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &84984118
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 84984117}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.857, z: 0.168}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1955563244}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &163065397
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 163065398}
-  - component: {fileID: 163065399}
-  m_Layer: 0
-  m_Name: LedgeGrabber
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &163065398
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 163065397}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.567, z: 0.335}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1955563244}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &163065399
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 163065397}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 29defba4edd754e42ab93e436727919f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::LedgeGrab
-  ledgeLayer:
-    m_Bits: 64
-  characterController: {fileID: 1955563243}
-  playerMovement: {fileID: 1955563245}
-  legCheckGO: {fileID: 84984117}
-  legCheck: 0
-  onlyHandsAnim: {fileID: 28003729}
-  bodyAnim: {fileID: 2035202784}
-  boxCastDistance: 0.5
-  isledgeGrab: 0
-  timeCounter: 0
-  maxTime: 0.2
-  climbCompleted: 0
-  ledgeTransform: {fileID: 0}
 --- !u!4 &249756740 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: c18122e5ef5f6da4bbf1382242101fed, type: 3}
@@ -871,37 +782,6 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 28003729}
   m_SourcePrefab: {fileID: 100100000, guid: 687849a56c4078d48b08f09529e55921, type: 3}
---- !u!1 &1199640112
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1199640113}
-  m_Layer: 0
-  m_Name: Hold Position
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1199640113
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1199640112}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.586, y: 0.418, z: 1.2}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1955563244}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1359249685
 GameObject:
   m_ObjectHideFlags: 0
@@ -1462,10 +1342,11 @@ GameObject:
   m_Component:
   - component: {fileID: 1955563244}
   - component: {fileID: 1955563243}
-  - component: {fileID: 1955563245}
   - component: {fileID: 1955563246}
-  - component: {fileID: 1955563247}
+  - component: {fileID: 1955563250}
+  - component: {fileID: 1955563249}
   - component: {fileID: 1955563248}
+  - component: {fileID: 1955563247}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -1515,38 +1396,8 @@ Transform:
   - {fileID: 249756740}
   - {fileID: 302905352}
   - {fileID: 1605580623}
-  - {fileID: 1199640113}
-  - {fileID: 163065398}
-  - {fileID: 84984118}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1955563245
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1955563242}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3dc6bb6fb396bfc49a566a239a9ce6ae, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PlayerMovement
-  playerManager: {fileID: 1955563248}
-  finalMove: {x: 0, y: 0, z: 0}
-  verticalMove: {x: 0, y: 0, z: 0}
-  horizontalMove: {x: 0, y: 0, z: 0}
-  cinemachineCamera: {fileID: 1852288438}
-  lookInput: {x: 0, y: 0}
-  move: {fileID: 6707366183689250088, guid: d7804f41e96ff3e4cbfff6cffca71830, type: 3}
-  jump: {fileID: -3054016491580824888, guid: d7804f41e96ff3e4cbfff6cffca71830, type: 3}
-  sprint: {fileID: 4485449602144160806, guid: d7804f41e96ff3e4cbfff6cffca71830, type: 3}
-  look: {fileID: 8840192623442975049, guid: d7804f41e96ff3e4cbfff6cffca71830, type: 3}
-  coyoteCounter: 0
-  jumpBufferCounter: 0
-  requiredIsGrounded: 0
-  bodyAnim: {fileID: 2035202784}
-  onlyHandsAnim: {fileID: 28003729}
 --- !u!114 &1955563246
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1586,15 +1437,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1955563242}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d070e7903ea5c734393f60d94a176824, type: 3}
+  m_Script: {fileID: 11500000, guid: c2a2f779026211b4a96b6a240c1c122f, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PickingScript
-  interact: {fileID: 2438677244378606972, guid: d7804f41e96ff3e4cbfff6cffca71830, type: 3}
-  fpsCamera: {fileID: 1852288437}
-  pickableLayer:
-    serializedVersion: 2
-    m_Bits: 8
-  holdPosition: {fileID: 1199640112}
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerContext
+  cinemachineCamera: {fileID: 1852288438}
+  MovementSpeed: 0
 --- !u!114 &1955563248
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1604,14 +1451,45 @@ MonoBehaviour:
   m_GameObject: {fileID: 1955563242}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 510df7e9da460a84bae541307fd3518e, type: 3}
+  m_Script: {fileID: 11500000, guid: 6910ffb2a3128e04bb76a6a41a9004f1, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PlayerManager
-  currentState: 0
-  playerMovementScript: {fileID: 1955563245}
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerAnimator
   bodyAnim: {fileID: 2035202784}
   onlyHandsAnim: {fileID: 28003729}
-  cam: {fileID: 1852288437}
+--- !u!114 &1955563249
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1955563242}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b1acf05957e9de547b8fc8c950f40cde, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerInput
+  move: {fileID: 6707366183689250088, guid: d7804f41e96ff3e4cbfff6cffca71830, type: 3}
+  jump: {fileID: -3054016491580824888, guid: d7804f41e96ff3e4cbfff6cffca71830, type: 3}
+  sprint: {fileID: 4485449602144160806, guid: d7804f41e96ff3e4cbfff6cffca71830, type: 3}
+  look: {fileID: 8840192623442975049, guid: d7804f41e96ff3e4cbfff6cffca71830, type: 3}
+--- !u!114 &1955563250
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1955563242}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86a0ce7954761a44fa93c386c70f17da, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerMotor
+  finalMove: {x: 0, y: 0, z: 0}
+  verticalMove: {x: 0, y: 0, z: 0}
+  horizontalMove: {x: 0, y: 0, z: 0}
+  coyoteCounter: 0
+  jumpBufferCounter: 0
+  requiredIsGrounded: 0
 --- !u!1 &2035202782 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7036213049465896255, guid: c18122e5ef5f6da4bbf1382242101fed, type: 3}

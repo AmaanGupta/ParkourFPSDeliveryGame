@@ -1,15 +1,14 @@
+using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class PlayerInput : MonoBehaviour
 {
     [Header("Player Fields")] 
-    [SerializeField] private PlayerContext player;
+    private PlayerContext player;
+    
 
 
-
-    private Vector2 inputmoveDirection;
-    [SerializeField] private Vector2 lookInput;
 
     [Header("INPUT ACTION REFRENCES")] 
     
@@ -18,20 +17,57 @@ public class PlayerInput : MonoBehaviour
     [SerializeField] private InputActionReference jump;
     [SerializeField] private InputActionReference sprint;
     [SerializeField] private InputActionReference look;
-    
 
-    private float targetFOV=60f;
-    private float mouseSensitivity=0.1f;
+
+    [Header("Public Input Variables")] 
+
+    public bool isJump {get; private set;}
+    public bool isSprinting {get; private set;}
+    public Vector2 inputmoveDirection{get;private set;}
+    public Vector2 lookInput{get;private set;}
+
+
+    void Awake()
+    {
+        player=GetComponent<PlayerContext>();
+    }
+    
     void OnEnable()
         {
-            player.MovementSpeed=player.ConstantMovementSpeed;
-            
-
-
             jump.action.started += Jump;
             sprint.action.started += StartSprint;
             sprint.action.canceled += StopSprint;
         }
+
+    void OnDisable()
+        {
+            jump.action.started -= Jump;
+            sprint.action.started -= StartSprint;
+            sprint.action.canceled -= StopSprint;
+        }
+
+    void Jump(InputAction.CallbackContext obj)
+    {
+        isJump=true;
+    }
+
+    void StartSprint(InputAction.CallbackContext obj)
+    {
+        isSprinting=true;
+    }
+    
+    void StopSprint(InputAction.CallbackContext obj)
+    {
+        isSprinting=false;
+    }
+
+    void Update()
+    {
+        inputmoveDirection=move.action.ReadValue<Vector2>();
+        lookInput=look.action.ReadValue<Vector2>();
+    }
+
+
 
     
     
