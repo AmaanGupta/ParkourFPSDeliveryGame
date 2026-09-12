@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 
 public class PlayerMotor : MonoBehaviour
 {
@@ -35,6 +36,10 @@ public class PlayerMotor : MonoBehaviour
         playerInput=GetComponent<PlayerInput>();
         playerContext=GetComponent<PlayerContext>();
     }
+    void Update()
+    {
+        ApplyGravity();
+    }
         
     
     public void HandleMovement()
@@ -58,14 +63,29 @@ public class PlayerMotor : MonoBehaviour
 
     private Vector3 VerticalMovement()
     {
-        verticalMove.y=-2f;
-        verticalMove.y-=playerContext.GRAVITY*Time.deltaTime;
+        
+        
+        
         return verticalMove;
     }
     void ResultantMovePlayer(Vector3 horizontalMove, Vector3 verticalMove)
     {
         finalMove=horizontalMove* playerContext.MovementSpeed+verticalMove;
         characterController.Move(finalMove*Time.deltaTime);
-        
     }
+    public bool CheckGrounded()
+    {
+        return characterController.isGrounded;
+    }
+    
+    
+    public void ApplyGravity()
+    {
+        if(characterController.isGrounded && verticalMove.y < 0)
+        {
+            verticalMove.y=-2f;
+        }
+        verticalMove.y-=playerContext.GRAVITY*Time.deltaTime;
+    }
+    
 }

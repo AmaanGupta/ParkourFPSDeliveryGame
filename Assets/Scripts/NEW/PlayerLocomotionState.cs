@@ -2,8 +2,7 @@ using UnityEngine;
 
 public class PlayerLocomotionState : PlayerBaseState
 {
-    private int currentIdleIndex;
-    private float idleTimer;
+    
     public PlayerLocomotionState(PlayerContext player,
                            PlayerStateMachine stateMachine): base(player, stateMachine)
     {
@@ -23,6 +22,11 @@ public class PlayerLocomotionState : PlayerBaseState
         if (player.PlayerInput.inputmoveDirection.magnitude <= 0.1f)
         {
             stateMachine.ChangeState(player.IdleState);
+            return;
+        }
+        if (player.PlayerInput.IsJumpPressed())
+        {
+            stateMachine.ChangeState(player.JumpState);
             return;
         }
         
