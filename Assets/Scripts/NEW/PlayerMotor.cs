@@ -9,9 +9,9 @@ public class PlayerMotor : MonoBehaviour
 
 
     [Header("VELOCITIESS")] 
-    [SerializeField] private Vector3 finalMove;
-    [SerializeField] private Vector3 verticalMove;
-    [SerializeField] private Vector3 horizontalMove;
+    public Vector3 finalMove;
+    public Vector3 verticalMove;
+    public Vector3 horizontalMove;
 
 
     private float mouseSensitivity=0.1f;
@@ -36,17 +36,6 @@ public class PlayerMotor : MonoBehaviour
         playerContext=GetComponent<PlayerContext>();
     }
         
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-        
-    }
     
     public void HandleMovement()
     {

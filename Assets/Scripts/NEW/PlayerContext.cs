@@ -18,6 +18,7 @@ public class PlayerContext : MonoBehaviour
     [Header("STATES")] 
     public PlayerIdleState IdleState { get; private set; }
     public PlayerLocomotionState LocomotionState { get; private set; }
+    public PlayerJumpState JumpState { get; private set; }
 
 
     [Header("Speeds")] 
@@ -28,13 +29,14 @@ public class PlayerContext : MonoBehaviour
     public float MovementSpeed;
 
     [Header("Jump Var")] 
-    private float jumpHeight=1.3f;
+    private float jumpHeight=1000f;
     public float JumpHeight=> jumpHeight;
     private float sprintMultiplier=2f;
     public float SprintMultiplier=>sprintMultiplier;
     
     const float gravity=18f;
     public float GRAVITY => gravity;
+
 
 
     void Awake()
@@ -47,6 +49,7 @@ public class PlayerContext : MonoBehaviour
         stateMachine = new PlayerStateMachine();
         IdleState = new PlayerIdleState(this, stateMachine);
         LocomotionState = new PlayerLocomotionState(this, stateMachine);
+        JumpState = new PlayerJumpState(this, stateMachine);
     }
     
     void Start()

@@ -21,7 +21,7 @@ public class PlayerInput : MonoBehaviour
 
     [Header("Public Input Variables")] 
 
-    public bool isJump {get; private set;}
+    public bool isJump;
     public bool isSprinting {get; private set;}
     public Vector2 inputmoveDirection{get;private set;}
     public Vector2 lookInput{get;private set;}
@@ -48,8 +48,19 @@ public class PlayerInput : MonoBehaviour
 
     void Jump(InputAction.CallbackContext obj)
     {
+        Debug.Log("JUMP EVENT FIRED");
         isJump=true;
     }
+
+    public bool IsJumpPressed()
+    {
+        if (!isJump) return false;
+
+        isJump = false;
+        return true;
+    }
+
+    
 
     void StartSprint(InputAction.CallbackContext obj)
     {
@@ -65,6 +76,7 @@ public class PlayerInput : MonoBehaviour
     {
         inputmoveDirection=move.action.ReadValue<Vector2>();
         lookInput=look.action.ReadValue<Vector2>();
+        
     }
 
 

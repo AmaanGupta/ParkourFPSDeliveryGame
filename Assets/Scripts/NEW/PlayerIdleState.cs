@@ -20,11 +20,14 @@ public class PlayerIdleState : PlayerBaseState
     {
         player.PlayerAnimator.HandleAnimation();
         player.PlayerMotor.HandleMovement();
+
         if (player.PlayerInput.inputmoveDirection.magnitude > 0.1f)
         {
             stateMachine.ChangeState(player.LocomotionState);
             return;
         }
+
+        
         
         
     }
