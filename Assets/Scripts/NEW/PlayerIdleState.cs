@@ -11,7 +11,7 @@ public class PlayerIdleState : PlayerBaseState
 
     public override void Enter()
     {
-        Debug.Log("enterd idle state");
+        
         player.PlayerAnimator.BodyAnim.SetBool("Move",false);
         player.PlayerAnimator.OnlyHandsAnim.SetBool("Move",false);
         
@@ -28,10 +28,10 @@ public class PlayerIdleState : PlayerBaseState
             stateMachine.ChangeState(player.LocomotionState);
             return;
         }
+        
 
         if (player.PlayerInput.IsJumpPressed())
         {
-            
             stateMachine.ChangeState(player.JumpState);
             return;
         }

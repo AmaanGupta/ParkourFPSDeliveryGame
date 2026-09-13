@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using Unity.Cinemachine;
+using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -24,6 +25,12 @@ public class PlayerAnimator : MonoBehaviour
         onlyHandsAnim.SetFloat("MoveX",playerInput.inputmoveDirection.x);
         onlyHandsAnim.SetFloat("MoveY",playerInput.inputmoveDirection.y);
         
+    }
+
+    public void JumpAnimation(bool jump)
+    {
+        bodyAnim.SetBool("Jump",jump);
+        onlyHandsAnim.SetBool("Jump",jump);
     }
     
 

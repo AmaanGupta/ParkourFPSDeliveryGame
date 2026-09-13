@@ -38,6 +38,7 @@ public class PlayerMotor : MonoBehaviour
     }
     void Update()
     {
+        
         ApplyGravity();
     }
         
@@ -63,9 +64,6 @@ public class PlayerMotor : MonoBehaviour
 
     private Vector3 VerticalMovement()
     {
-        
-        
-        
         return verticalMove;
     }
     void ResultantMovePlayer(Vector3 horizontalMove, Vector3 verticalMove)
@@ -75,6 +73,7 @@ public class PlayerMotor : MonoBehaviour
     }
     public bool CheckGrounded()
     {
+        
         return characterController.isGrounded;
     }
     
@@ -87,5 +86,6 @@ public class PlayerMotor : MonoBehaviour
         }
         verticalMove.y-=playerContext.GRAVITY*Time.deltaTime;
     }
+    
     
 }

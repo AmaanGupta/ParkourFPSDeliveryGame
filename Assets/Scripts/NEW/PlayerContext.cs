@@ -3,6 +3,8 @@ using Unity.Cinemachine;
 
 public class PlayerContext : MonoBehaviour
 {
+
+
     [Header("Player Must Have")] 
     public PlayerMotor PlayerMotor{get; private set;}
     public PlayerInput PlayerInput{get; private set;}
@@ -15,12 +17,16 @@ public class PlayerContext : MonoBehaviour
     private PlayerStateMachine stateMachine;
 
 
+
+
     [Header("STATES")] 
     
     public PlayerIdleState IdleState { get; private set; }
     public PlayerLocomotionState LocomotionState { get; private set; }
     public PlayerJumpState JumpState { get; private set; }
     public PlayerFallState FallState { get; private set; }
+
+
 
 
     [Header("Speeds")] 
@@ -30,11 +36,16 @@ public class PlayerContext : MonoBehaviour
     
     public float MovementSpeed;
 
+
+
+
     [Header("Jump Var")] 
-    private float jumpHeight=1.3f;
+    private float jumpHeight=2f;
     public float JumpHeight=> jumpHeight;
     private float sprintMultiplier=2f;
     public float SprintMultiplier=>sprintMultiplier;
+    
+    public float jumpBufferTimer=0.2f;
     
     const float gravity=18f;
     public float GRAVITY => gravity;
