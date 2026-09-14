@@ -47,7 +47,7 @@ public class PlayerContext : MonoBehaviour
     
     public float jumpBufferTimer=0.2f;
     
-    const float gravity=18f;
+    const float gravity=10;
     public float GRAVITY => gravity;
 
 
@@ -77,6 +77,6 @@ public class PlayerContext : MonoBehaviour
     void Update()
     {
         stateMachine.CurrentState.Update();
-        // Debug.Log(stateMachine.CurrentState);
+        Debug.Log(stateMachine.CurrentState);
     }
 }

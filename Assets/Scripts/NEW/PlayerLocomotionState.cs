@@ -29,6 +29,11 @@ public class PlayerLocomotionState : PlayerBaseState
             stateMachine.ChangeState(player.JumpState);
             return;
         }
+        if (!player.PlayerMotor.CheckGrounded())
+        {
+            stateMachine.ChangeState(player.FallState);
+            return;
+        }
         
         
     }

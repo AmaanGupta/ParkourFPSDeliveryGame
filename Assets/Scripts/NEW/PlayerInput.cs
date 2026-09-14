@@ -74,7 +74,7 @@ public class PlayerInput : MonoBehaviour
 
     void Update()
     {
-        Debug.Log(isJump);
+        
         inputmoveDirection=move.action.ReadValue<Vector2>();
         lookInput=look.action.ReadValue<Vector2>();
         

@@ -25,8 +25,7 @@ public class PlayerMotor : MonoBehaviour
     
     [SerializeField] private float coyoteCounter=0f;
     private float coyoteTimer=0.2f;
-    [SerializeField] private float jumpBufferCounter=0f;
-    private float jumpBufferTimer=0.2f;
+    
     
     [SerializeField] private bool requiredIsGrounded=false;
 

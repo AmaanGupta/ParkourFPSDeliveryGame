@@ -20,6 +20,7 @@ public class PlayerIdleState : PlayerBaseState
 
     public override void Update()
     {
+        
         player.PlayerAnimator.HandleAnimation();
         player.PlayerMotor.HandleMovement();
 
@@ -28,8 +29,13 @@ public class PlayerIdleState : PlayerBaseState
             stateMachine.ChangeState(player.LocomotionState);
             return;
         }
-        
 
+        if (!player.PlayerMotor.CheckGrounded())
+        {
+            stateMachine.ChangeState(player.FallState);
+            return;
+        }
+        
         if (player.PlayerInput.IsJumpPressed())
         {
             stateMachine.ChangeState(player.JumpState);
