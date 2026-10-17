@@ -1,17 +1,18 @@
 using UnityEngine;
 
-public class PlayerLocomotionState : PlayerBaseState
+public class PlayerSprintState : PlayerBaseState
 {
     
-    public PlayerLocomotionState(PlayerContext player,
+    public PlayerSprintState(PlayerContext player,
                            PlayerStateMachine stateMachine): base(player, stateMachine)
     {
     }
 
     public override void Enter()
     {
-        player.PlayerAnimator.BodyAnim.SetBool("Move",true);
-        player.PlayerAnimator.OnlyHandsAnim.SetBool("Move",true);
+        player.MovementSpeed=player.SprintMovementSpeed;
+        player.PlayerAnimator.BodyAnim.SetBool("Sprint",true);
+        player.PlayerAnimator.OnlyHandsAnim.SetBool("Sprint",true);
         
     }
 
@@ -19,6 +20,11 @@ public class PlayerLocomotionState : PlayerBaseState
     public override void Update()
     {
         player.PlayerMotor.HandleMovement();
+        if (!player.PlayerInput.isSprinting)
+        {
+            stateMachine.ChangeState(player.LocomotionState);
+            return;
+        }
         if (player.PlayerInput.inputmoveDirection.magnitude <= 0.1f)
         {
             stateMachine.ChangeState(player.IdleState);
@@ -34,8 +40,14 @@ public class PlayerLocomotionState : PlayerBaseState
             stateMachine.ChangeState(player.FallState);
             return;
         }
-        
+          
+    }
+    public override void Exit()
+    {
+        player.PlayerAnimator.BodyAnim.SetBool("Sprint",false);
+        player.PlayerAnimator.OnlyHandsAnim.SetBool("Sprint",false);
         
     }
+
     
 }

@@ -45,7 +45,7 @@ public class PlayerMotor : MonoBehaviour
     public void HandleMovement()
     {
         CameraX();
-        playerContext.MovementSpeed=playerContext.ConstantMovementSpeed;
+        
         ResultantMovePlayer(HorizontalMovement(),VerticalMovement());
     }
 
