@@ -20,11 +20,35 @@ public class PlayerAnimator : MonoBehaviour
     }    
     public void HandleAnimation()
     {
-        bodyAnim.SetFloat("MoveX",playerInput.inputmoveDirection.x);
-        bodyAnim.SetFloat("MoveY",playerInput.inputmoveDirection.y);
-        onlyHandsAnim.SetFloat("MoveX",playerInput.inputmoveDirection.x);
-        onlyHandsAnim.SetFloat("MoveY",playerInput.inputmoveDirection.y);
-        
+        float dampTime = 0.15f;
+
+        bodyAnim.SetFloat(
+            "MoveX",
+            playerInput.inputmoveDirection.x,
+            dampTime,
+            Time.deltaTime
+        );
+
+        bodyAnim.SetFloat(
+            "MoveY",
+            playerInput.inputmoveDirection.y,
+            dampTime,
+            Time.deltaTime
+        );
+
+        onlyHandsAnim.SetFloat(
+            "MoveX",
+            playerInput.inputmoveDirection.x,
+            dampTime,
+            Time.deltaTime
+        );
+
+        onlyHandsAnim.SetFloat(
+            "MoveY",
+            playerInput.inputmoveDirection.y,
+            dampTime,
+            Time.deltaTime
+        );
     }
 
     public void JumpAnimation(bool jump)
