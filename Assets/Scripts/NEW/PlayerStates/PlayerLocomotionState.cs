@@ -11,8 +11,7 @@ public class PlayerLocomotionState : PlayerBaseState
     public override void Enter()
     {
         player.MovementSpeed=player.ConstantMovementSpeed;
-        player.PlayerAnimator.BodyAnim.SetBool("Move",true);
-        player.PlayerAnimator.OnlyHandsAnim.SetBool("Move",true);
+        
         
     }
 
@@ -21,9 +20,15 @@ public class PlayerLocomotionState : PlayerBaseState
     {
 
         player.PlayerMotor.HandleMovement();
+        player.PlayerAnimator.HandleAnimation();
         if (player.PlayerInput.isSprinting)
         {
             stateMachine.ChangeState(player.SprintState);
+            return;
+        }
+        if (player.PlayerInput.isCrouching)
+        {
+            stateMachine.ChangeState(player.CrouchState);
             return;
         }
         if (player.PlayerInput.inputmoveDirection.magnitude <= 0.1f)
@@ -41,6 +46,11 @@ public class PlayerLocomotionState : PlayerBaseState
             stateMachine.ChangeState(player.FallState);
             return;
         }
+        
+        
+    }
+    public override void Exit()
+    {
         
         
     }

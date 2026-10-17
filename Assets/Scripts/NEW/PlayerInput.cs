@@ -16,6 +16,7 @@ public class PlayerInput : MonoBehaviour
     
     [SerializeField] private InputActionReference jump;
     [SerializeField] private InputActionReference sprint;
+    [SerializeField] private InputActionReference crouch;
     [SerializeField] private InputActionReference look;
 
 
@@ -23,6 +24,7 @@ public class PlayerInput : MonoBehaviour
 
     public bool isJump;
     public bool isSprinting {get; private set;}
+    public bool isCrouching {get; private set;}
     public Vector2 inputmoveDirection{get;private set;}
     public Vector2 lookInput{get;private set;}
 
@@ -37,6 +39,8 @@ public class PlayerInput : MonoBehaviour
             jump.action.started += Jump;
             sprint.action.started += StartSprint;
             sprint.action.canceled += StopSprint;
+            crouch.action.started += Crouch;
+            
         }
 
     void OnDisable()
@@ -44,6 +48,8 @@ public class PlayerInput : MonoBehaviour
             jump.action.started -= Jump;
             sprint.action.started -= StartSprint;
             sprint.action.canceled -= StopSprint;
+            crouch.action.started -= Crouch;
+            
         }
 
     void Jump(InputAction.CallbackContext obj)
@@ -71,10 +77,16 @@ public class PlayerInput : MonoBehaviour
     {
         isSprinting=false;
     }
+    void Crouch(InputAction.CallbackContext obj)
+    {
+        isCrouching=!isCrouching;
+    }
+    
+    
 
     void Update()
     {
-        
+        Debug.Log($"Cached: {inputmoveDirection}");
         inputmoveDirection=move.action.ReadValue<Vector2>();
         lookInput=look.action.ReadValue<Vector2>();
         

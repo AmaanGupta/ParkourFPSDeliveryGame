@@ -12,8 +12,7 @@ public class PlayerIdleState : PlayerBaseState
     public override void Enter()
     {
         
-        player.PlayerAnimator.BodyAnim.SetBool("Move",false);
-        player.PlayerAnimator.OnlyHandsAnim.SetBool("Move",false);
+        
         
     }
 
@@ -27,6 +26,11 @@ public class PlayerIdleState : PlayerBaseState
         if (player.PlayerInput.inputmoveDirection.magnitude > 0.1f)
         {
             stateMachine.ChangeState(player.LocomotionState);
+            return;
+        }
+        if (player.PlayerInput.isCrouching)
+        {
+            stateMachine.ChangeState(player.CrouchState);
             return;
         }
 

@@ -11,8 +11,8 @@ public class PlayerSprintState : PlayerBaseState
     public override void Enter()
     {
         player.MovementSpeed=player.SprintMovementSpeed;
-        player.PlayerAnimator.BodyAnim.SetBool("Sprint",true);
-        player.PlayerAnimator.OnlyHandsAnim.SetBool("Sprint",true);
+        player.PlayerAnimator.SprintAnimation(true);
+        
         
     }
 
@@ -20,6 +20,7 @@ public class PlayerSprintState : PlayerBaseState
     public override void Update()
     {
         player.PlayerMotor.HandleMovement();
+        player.PlayerAnimator.HandleAnimation();
         if (!player.PlayerInput.isSprinting)
         {
             stateMachine.ChangeState(player.LocomotionState);
@@ -44,8 +45,7 @@ public class PlayerSprintState : PlayerBaseState
     }
     public override void Exit()
     {
-        player.PlayerAnimator.BodyAnim.SetBool("Sprint",false);
-        player.PlayerAnimator.OnlyHandsAnim.SetBool("Sprint",false);
+        player.PlayerAnimator.SprintAnimation(false);
         
     }
 

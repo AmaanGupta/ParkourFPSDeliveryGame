@@ -24,6 +24,7 @@ public class PlayerContext : MonoBehaviour
     public PlayerIdleState IdleState { get; private set; }
     public PlayerLocomotionState LocomotionState { get; private set; }
     public PlayerSprintState SprintState { get; private set; }
+    public PlayerCrouchState CrouchState { get; private set; }
     
 
     public PlayerJumpState JumpState { get; private set; }
@@ -34,10 +35,12 @@ public class PlayerContext : MonoBehaviour
 
     [Header("Speeds")] 
 
-    private float constantmovementSpeed=2f;
+    private float constantmovementSpeed=3f;
     public float ConstantMovementSpeed=> constantmovementSpeed;
     private float sprintMovementSpeed=5f;
     public float SprintMovementSpeed=> sprintMovementSpeed;
+    private float crouchMovementSpeed=2f;
+    public float CrouchMovementSpeed=> crouchMovementSpeed;
     
     public float MovementSpeed;
 
@@ -67,6 +70,7 @@ public class PlayerContext : MonoBehaviour
         IdleState = new PlayerIdleState(this, stateMachine);
         LocomotionState = new PlayerLocomotionState(this, stateMachine);
         SprintState = new PlayerSprintState(this, stateMachine);
+        CrouchState = new PlayerCrouchState(this, stateMachine);
         FallState = new PlayerFallState(this, stateMachine);
         JumpState = new PlayerJumpState(this, stateMachine);
     }
