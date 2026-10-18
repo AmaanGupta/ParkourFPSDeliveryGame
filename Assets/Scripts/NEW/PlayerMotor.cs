@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
 
@@ -16,6 +17,7 @@ public class PlayerMotor : MonoBehaviour
 
 
     private float mouseSensitivity=0.1f;
+    private float heightVelocity = 0f;
 
 
     
@@ -37,6 +39,7 @@ public class PlayerMotor : MonoBehaviour
     }
     void Update()
     {
+        CameraHeightTarget();
         
         ApplyGravity();
     }
@@ -84,6 +87,22 @@ public class PlayerMotor : MonoBehaviour
             verticalMove.y=-2f;
         }
         verticalMove.y-=playerContext.GRAVITY*Time.deltaTime;
+    }
+    public void CameraHeightTarget()
+    {
+        Vector3 currentpos = playerContext.CameraTracker.localPosition;
+        float currentHeight = currentpos.y;
+        
+        float smoothTime=0.15f;
+        
+        
+        currentHeight=Mathf.SmoothDamp(currentHeight,playerContext.TargetHeigh,ref heightVelocity ,smoothTime);
+        playerContext.CameraTracker.localPosition = new Vector3(currentpos.x,currentHeight,currentpos.z); 
+    }
+
+    public void SetCrouchingCamera( bool isCrouching)
+    {
+        playerContext.TargetHeigh= isCrouching? playerContext.CrouchedHeight: playerContext.NormalHeight;
     }
     
     

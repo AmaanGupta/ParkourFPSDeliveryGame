@@ -57,10 +57,24 @@ public class PlayerContext : MonoBehaviour
     const float gravity=10;
     public float GRAVITY => gravity;
 
+    [Header("Camera Tracker")] 
+    [SerializeField] private Transform cameraTracker;
+    public Transform CameraTracker => cameraTracker;
+    
+    
+    private float normalHeight=0.87f;
+    public float NormalHeight => normalHeight;
+    private float crouchedHeight=0.42f;
+    public float CrouchedHeight => crouchedHeight;
+    public float TargetHeigh;
+
+
+
 
 
     void Awake()
     {
+        TargetHeigh=normalHeight;
         PlayerMotor=GetComponent<PlayerMotor>();
         PlayerInput=GetComponent<PlayerInput>();
         PlayerAnimator=GetComponent<PlayerAnimator>();

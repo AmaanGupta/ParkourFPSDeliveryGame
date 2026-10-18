@@ -10,6 +10,7 @@ public class PlayerCrouchState : PlayerBaseState
 
     public override void Enter()
     {
+        player.PlayerMotor.SetCrouchingCamera(true);
         player.MovementSpeed=player.CrouchMovementSpeed;
         player.PlayerAnimator.CrouchAnimation(true);
         
@@ -39,6 +40,7 @@ public class PlayerCrouchState : PlayerBaseState
     }
     public override void Exit()
     {
+        player.PlayerMotor.SetCrouchingCamera(false);
         player.PlayerAnimator.CrouchAnimation(false);
         
     }
