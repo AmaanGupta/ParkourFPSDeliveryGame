@@ -86,7 +86,7 @@ public class PlayerInput : MonoBehaviour
 
     void Update()
     {
-        Debug.Log($"Cached: {inputmoveDirection}");
+        
         inputmoveDirection=move.action.ReadValue<Vector2>();
         lookInput=look.action.ReadValue<Vector2>();
         

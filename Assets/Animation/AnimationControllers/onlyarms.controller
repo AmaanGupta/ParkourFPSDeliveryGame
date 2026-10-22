@@ -7,7 +7,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: jump 0
+  m_Name: Jump
   m_Speed: 0.6
   m_CycleOffset: 0
   m_Transitions:
@@ -607,7 +607,7 @@ AnimatorStateMachine:
     m_Position: {x: 630, y: -20, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -2151487338382913081}
-    m_Position: {x: 260, y: 210, z: 0}
+    m_Position: {x: 300, y: 200, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 7002936781555923727}
     m_Position: {x: 300, y: -60, z: 0}

@@ -70,11 +70,6 @@ public class PlayerJumpState : PlayerBaseState
     public override void Exit()
     {
         player.PlayerAnimator.JumpAnimation(false);
-        
-        
-        
-        
-        
-        
+     
     }
 }
