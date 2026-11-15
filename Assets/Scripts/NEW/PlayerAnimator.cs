@@ -64,8 +64,8 @@ public class PlayerAnimator : MonoBehaviour
     }
     public void FallAnimation(bool fall)
     {
-        bodyAnim.SetBool("Jump",fall);
-        onlyHandsAnim.SetBool("Jump",fall);
+        bodyAnim.SetBool("Fall",fall);
+        onlyHandsAnim.SetBool("Fall",fall);
     }
     public void SprintAnimation(bool fall)
     {
