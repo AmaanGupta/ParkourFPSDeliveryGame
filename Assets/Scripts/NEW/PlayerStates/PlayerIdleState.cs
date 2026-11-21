@@ -11,6 +11,8 @@ public class PlayerIdleState : PlayerBaseState
 
     public override void Enter()
     {
+        player.canAim=true;
+        player.canMove=true;
         
         
         
@@ -50,7 +52,12 @@ public class PlayerIdleState : PlayerBaseState
             stateMachine.ChangeState(player.PunchState);
             return;
         }
+
         
+        
+    }
+    public override void Exit()
+    {
         
     }
     

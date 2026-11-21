@@ -18,6 +18,14 @@ public class PlayerContext : MonoBehaviour
     public CinemachineCamera CinemachineCamera=> cinemachineCamera;
     private PlayerStateMachine stateMachine;
 
+    [Header("Player Can")]
+    public bool canMove{get;set;} 
+    public bool canJump{get;set;} 
+    public bool canCrouch{get;set;} 
+    public bool canAim{get;set;} 
+    public bool canInteract{get; set;} 
+    public bool canSprint{get;set;} 
+
 
 
 
@@ -51,12 +59,9 @@ public class PlayerContext : MonoBehaviour
 
 
     [Header("Jump Var")] 
-    private float jumpHeight=2f;
-    public float JumpHeight=> jumpHeight;
-    
-    
+    private float jumpHeight=1f;
+    public float JumpHeight => jumpHeight;
     public float jumpBufferTimer=0.2f;
-    
     const float gravity=10;
     public float GRAVITY => gravity;
 
@@ -76,10 +81,6 @@ public class PlayerContext : MonoBehaviour
     [SerializeField] private LayerMask punchableLayer;
     public LayerMask PunchableLayer=>punchableLayer;
 
-
-
-
-
     void Awake()
     {
         TargetHeight=normalHeight;
@@ -96,6 +97,13 @@ public class PlayerContext : MonoBehaviour
         CrouchState = new PlayerCrouchState(this, stateMachine);
         FallState = new PlayerFallState(this, stateMachine);
         JumpState = new PlayerJumpState(this, stateMachine);
+
+        canAim=true;
+        canMove=true;
+        canSprint=true;
+        canCrouch=true;
+        canJump=true;
+        canInteract=true;
     }
     
     void Start()

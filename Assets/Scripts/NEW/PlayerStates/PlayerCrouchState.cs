@@ -13,6 +13,7 @@ public class PlayerCrouchState : PlayerBaseState
         player.PlayerMotor.SetCrouchingCamera(true);
         player.MovementSpeed=player.CrouchMovementSpeed;
         player.PlayerAnimator.CrouchAnimation(true);
+        player.canJump=false;
         
     }
 
@@ -42,6 +43,7 @@ public class PlayerCrouchState : PlayerBaseState
     {
         player.PlayerMotor.SetCrouchingCamera(false);
         player.PlayerAnimator.CrouchAnimation(false);
+        player.canJump=true;
         
     }
     

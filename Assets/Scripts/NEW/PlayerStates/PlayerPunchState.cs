@@ -11,7 +11,7 @@ public class PlayerPunchState : PlayerBaseState
     }
 
     float punchTime;
-    float maxPunchTime=2f;
+    float maxPunchTime=0.1f;
     Vector3 selectedCentre;
     
 
@@ -19,6 +19,7 @@ public class PlayerPunchState : PlayerBaseState
 
     public override void Enter()
     {
+        player.canInteract=false;
         punchTime=maxPunchTime;
         Punch();
      
@@ -42,6 +43,7 @@ public class PlayerPunchState : PlayerBaseState
     }
     public override void Exit()
     {
+        player.canInteract=true;
         
         
     }
@@ -52,15 +54,16 @@ public class PlayerPunchState : PlayerBaseState
         {
             selectedCentre=hit.collider.transform.position;
        
-            Collider[] hits = Physics.OverlapSphere(selectedCentre,1f,player.PunchableLayer);
+            Collider[] hits = Physics.OverlapSphere(selectedCentre,1.6f,player.PunchableLayer);
+            Vector3 explosionOrigin = selectedCentre-player.CinemachineCamera.transform.forward*0.5f;
 
             foreach (Collider c in hits)
             {
                 Debug.Log($"Punching {c.name}");
-                Rigidbody rb=c.gameObject.GetComponent<Rigidbody>();
-                
+                Rigidbody rb = c.gameObject.GetComponent<Rigidbody>();
+               
                 rb.isKinematic=false;
-                rb.AddForce(player.CinemachineCamera.transform.forward * 20f, ForceMode.Impulse);
+                rb.AddExplosionForce( 6f ,explosionOrigin, 10f , 0.3f , ForceMode.Impulse);
             }
 
             

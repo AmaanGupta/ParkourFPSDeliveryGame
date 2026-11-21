@@ -14,6 +14,7 @@ public class PlayerJumpState : PlayerBaseState
         player.PlayerAnimator.JumpAnimation(true);
         jumpDelay=0.1f;
         player.PlayerMotor.verticalMove.y=Mathf.Sqrt(2*player.GRAVITY*player.JumpHeight);
+        player.canInteract=false;
         
         
         
@@ -69,6 +70,7 @@ public class PlayerJumpState : PlayerBaseState
     }
     public override void Exit()
     {
+        player.canInteract=true;
         player.PlayerAnimator.JumpAnimation(false);
      
     }

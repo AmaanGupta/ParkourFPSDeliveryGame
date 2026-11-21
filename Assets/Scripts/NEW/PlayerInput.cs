@@ -6,6 +6,8 @@ public class PlayerInput : MonoBehaviour
 {
     [Header("Player Fields")] 
     private PlayerContext player;
+
+    
     
 
 
@@ -59,8 +61,8 @@ public class PlayerInput : MonoBehaviour
 
     void Jump(InputAction.CallbackContext obj)
     {
+        if(player.canJump) isJump=true;
         
-        isJump=true;
     }
 
     public bool IsJumpPressed()
@@ -73,7 +75,7 @@ public class PlayerInput : MonoBehaviour
     void Interact(InputAction.CallbackContext obj)
     {
         
-        isInteract=true;
+        if(player.canInteract) isInteract=true;
     }
 
     public bool IsInteractPressed()
@@ -88,16 +90,16 @@ public class PlayerInput : MonoBehaviour
 
     void StartSprint(InputAction.CallbackContext obj)
     {
-        isSprinting=true;
+        if(player.canSprint) isSprinting=true;
     }
     
     void StopSprint(InputAction.CallbackContext obj)
     {
-        isSprinting=false;
+        if(player.canSprint) isSprinting=false;
     }
     void Crouch(InputAction.CallbackContext obj)
     {
-        isCrouching=!isCrouching;
+        if(player.canCrouch) isCrouching=!isCrouching;
     }
     
     
@@ -105,8 +107,8 @@ public class PlayerInput : MonoBehaviour
     void Update()
     {
         
-        inputmoveDirection=move.action.ReadValue<Vector2>();
-        lookInput=look.action.ReadValue<Vector2>();
+        if(player.canMove) inputmoveDirection=move.action.ReadValue<Vector2>();
+        if(player.canAim) lookInput=look.action.ReadValue<Vector2>();
         
     }
 
