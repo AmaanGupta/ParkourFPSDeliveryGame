@@ -11,8 +11,6 @@ public class PlayerLocomotionState : PlayerBaseState
     public override void Enter()
     {
         player.MovementSpeed=player.ConstantMovementSpeed;
-        
-        
     }
 
 
@@ -39,6 +37,11 @@ public class PlayerLocomotionState : PlayerBaseState
         if (player.PlayerInput.IsJumpPressed())
         {
             stateMachine.ChangeState(player.JumpState);
+            return;
+        }
+        if (player.PlayerInput.IsInteractPressed())
+        {
+            stateMachine.ChangeState(player.PunchState);
             return;
         }
         if (!player.PlayerMotor.CheckGrounded())

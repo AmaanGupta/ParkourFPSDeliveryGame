@@ -45,6 +45,11 @@ public class PlayerIdleState : PlayerBaseState
             stateMachine.ChangeState(player.JumpState);
             return;
         }
+        if (player.PlayerInput.IsInteractPressed())
+        {
+            stateMachine.ChangeState(player.PunchState);
+            return;
+        }
         
         
     }

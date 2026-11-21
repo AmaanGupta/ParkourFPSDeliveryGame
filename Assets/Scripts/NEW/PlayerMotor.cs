@@ -1,4 +1,4 @@
-using Unity.VisualScripting;
+
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
 
@@ -96,13 +96,13 @@ public class PlayerMotor : MonoBehaviour
         float smoothTime=0.15f;
         
         
-        currentHeight=Mathf.SmoothDamp(currentHeight,playerContext.TargetHeigh,ref heightVelocity ,smoothTime);
+        currentHeight=Mathf.SmoothDamp(currentHeight,playerContext.TargetHeight,ref heightVelocity ,smoothTime);
         playerContext.CameraTracker.localPosition = new Vector3(currentpos.x,currentHeight,currentpos.z); 
     }
 
     public void SetCrouchingCamera( bool isCrouching)
     {
-        playerContext.TargetHeigh= isCrouching? playerContext.CrouchedHeight: playerContext.NormalHeight;
+        playerContext.TargetHeight= isCrouching? playerContext.CrouchedHeight: playerContext.NormalHeight;
     }
     
     

@@ -12,7 +12,7 @@ public class PlayerJumpState : PlayerBaseState
     public override void Enter()
     {
         player.PlayerAnimator.JumpAnimation(true);
-        jumpDelay=0.2f;
+        jumpDelay=0.1f;
         player.PlayerMotor.verticalMove.y=Mathf.Sqrt(2*player.GRAVITY*player.JumpHeight);
         
         
@@ -27,7 +27,7 @@ public class PlayerJumpState : PlayerBaseState
         player.jumpBufferTimer-=Time.deltaTime;
         if (player.PlayerInput.IsJumpPressed())   
         {
-            player.jumpBufferTimer=0.2f;
+            player.jumpBufferTimer=0.1f;
 
         }
         if (player.jumpBufferTimer >= 0)

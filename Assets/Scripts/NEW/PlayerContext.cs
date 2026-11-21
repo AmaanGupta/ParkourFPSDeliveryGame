@@ -1,5 +1,6 @@
 using UnityEngine;
 using Unity.Cinemachine;
+using System;
 
 public class PlayerContext : MonoBehaviour
 {
@@ -14,6 +15,7 @@ public class PlayerContext : MonoBehaviour
 
     [Header("FPP CAMERA")] 
     [SerializeField] private CinemachineCamera cinemachineCamera;
+    public CinemachineCamera CinemachineCamera=> cinemachineCamera;
     private PlayerStateMachine stateMachine;
 
 
@@ -23,6 +25,7 @@ public class PlayerContext : MonoBehaviour
     
     public PlayerIdleState IdleState { get; private set; }
     public PlayerLocomotionState LocomotionState { get; private set; }
+    public PlayerPunchState PunchState { get; private set; }
     public PlayerSprintState SprintState { get; private set; }
     public PlayerCrouchState CrouchState { get; private set; }
     
@@ -66,7 +69,12 @@ public class PlayerContext : MonoBehaviour
     public float NormalHeight => normalHeight;
     private float crouchedHeight=0.42f;
     public float CrouchedHeight => crouchedHeight;
-    public float TargetHeigh;
+    public float TargetHeight;
+
+
+    [Header("Punch Var")] 
+    [SerializeField] private LayerMask punchableLayer;
+    public LayerMask PunchableLayer=>punchableLayer;
 
 
 
@@ -74,7 +82,7 @@ public class PlayerContext : MonoBehaviour
 
     void Awake()
     {
-        TargetHeigh=normalHeight;
+        TargetHeight=normalHeight;
         PlayerMotor=GetComponent<PlayerMotor>();
         PlayerInput=GetComponent<PlayerInput>();
         PlayerAnimator=GetComponent<PlayerAnimator>();
@@ -83,6 +91,7 @@ public class PlayerContext : MonoBehaviour
         stateMachine = new PlayerStateMachine();
         IdleState = new PlayerIdleState(this, stateMachine);
         LocomotionState = new PlayerLocomotionState(this, stateMachine);
+        PunchState = new PlayerPunchState(this,stateMachine);
         SprintState = new PlayerSprintState(this, stateMachine);
         CrouchState = new PlayerCrouchState(this, stateMachine);
         FallState = new PlayerFallState(this, stateMachine);
@@ -100,6 +109,6 @@ public class PlayerContext : MonoBehaviour
     void Update()
     {
         stateMachine.CurrentState.Update();
-        Debug.Log(stateMachine.CurrentState);
+        
     }
 }
