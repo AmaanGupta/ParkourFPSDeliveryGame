@@ -19,6 +19,7 @@ public class PlayerPunchState : PlayerBaseState
 
     public override void Enter()
     {
+        player.PlayerAnimator.PunchAnimation(true);
         player.canInteract=false;
         punchTime=maxPunchTime;
         Punch();
@@ -43,6 +44,7 @@ public class PlayerPunchState : PlayerBaseState
     }
     public override void Exit()
     {
+        player.PlayerAnimator.PunchAnimation(false);
         player.canInteract=true;
         
         

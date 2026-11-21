@@ -77,6 +77,11 @@ public class PlayerAnimator : MonoBehaviour
         bodyAnim.SetBool("Crouch",fall);
         onlyHandsAnim.SetBool("Crouch",fall);
     }
+    public void PunchAnimation(bool fall)
+    {
+        bodyAnim.SetBool("Punch",fall);
+        onlyHandsAnim.SetBool("Punch",fall);
+    }
     
 
 }
